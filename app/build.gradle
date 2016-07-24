@@ -21,8 +21,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:3.8.2'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
     compile 'com.afollestad.material-dialogs:core:0.8.6.2'
+    compile 'com.github.GoodEnoughSoftware:audroid:v0.1-alpha'
 }
