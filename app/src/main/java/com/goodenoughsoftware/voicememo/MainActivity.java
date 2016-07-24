@@ -5,18 +5,17 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewAnimationUtils;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.goodenoughsoftware.voicememo.fragments.RecordingFragment;
+import com.goodenoughsoftware.voicememo.fragments.TagsDialogFragment;
 import com.goodenoughsoftware.voicememo.utils.ViewHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -65,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_about:
                 displayAbout();
                 break;
+            case R.id.action_tags:
+                displayTags();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -94,6 +96,17 @@ public class MainActivity extends AppCompatActivity {
             premiumText.setVisibility(View.GONE);
             freeText.setVisibility(View.VISIBLE);
         }
+
+    }
+
+    /**
+     * Shows the dialog to manage tags
+     */
+    private void displayTags() {
+
+        FragmentManager fm = getSupportFragmentManager();
+        TagsDialogFragment tagsDialogFragment = new TagsDialogFragment();
+        tagsDialogFragment.show(fm, "dialog_tags");
 
     }
 
