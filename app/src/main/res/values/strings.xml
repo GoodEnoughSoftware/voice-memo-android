@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">Voice Memo</string>
     <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+
+    <string name="version_byline">Version 0.1</string>
+
+    <!-- About Dialog -->
+    <string name="company_byline">Made by Good Enough Software</string>
+    <string name="premium_byline">Premium User</string>
+    <string name="free_byline">Free Version</string>
+    <string name="about_dismiss">Dismiss</string>
+    <string name="website_byline">http://goodenoughsoftware.com</string>
+    <string name="website_link">http://goodenoughsoftware.com</string>
+
 </resources>

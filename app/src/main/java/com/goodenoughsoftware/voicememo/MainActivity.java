@@ -8,8 +8,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    // TODO: Use a user object for this
+    private boolean premium = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +49,40 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id) {
+            case R.id.action_about:
+                displayAbout();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * Shows an about dialog with application and user information
+     */
+    private void displayAbout() {
+
+        // Display the about dialog
+        boolean wrapInScrollView = true;
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .customView(R.layout.dialog_about, wrapInScrollView)
+                .positiveText(R.string.about_dismiss)
+                .show();
+
+        // Show whether the user is a free or premium user
+        View view = dialog.getCustomView();
+        TextView premiumText = (TextView) view.findViewById(R.id.premium_member);
+        TextView freeText = (TextView) view.findViewById(R.id.free_member);
+
+        if(premium) {
+            premiumText.setVisibility(View.VISIBLE);
+            freeText.setVisibility(View.GONE);
+        } else {
+            premiumText.setVisibility(View.GONE);
+            freeText.setVisibility(View.VISIBLE);
+        }
+
+    }
+
 }
