@@ -1,6 +1,8 @@
 package com.goodenoughsoftware.voicememo;
 
 import android.animation.Animator;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,15 +11,19 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewAnimationUtils;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.goodenoughsoftware.voicememo.fragments.RecordingFragment;
+import com.goodenoughsoftware.voicememo.utils.ViewHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-
     // TODO: Use a user object for this
     private boolean premium = false;
+    private RecordingFragment recordingFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Attach the recording fragment
+        recordingFragment = new RecordingFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.recording_screen, recordingFragment);
+        transaction.commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -88,64 +100,12 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Uses a radial reveal to instantiate and start the recording
      */
-    void showRecordingScreen() {
+    public void showRecordingScreen() {
 
-        // Get animation info for FAB --------------------------------------------------------------
+        // TODO: Go full screen
 
-        // previously invisible view
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-        // get the center for the fab circle
-        int fx = fab.getMeasuredWidth() / 2;
-        int fy = fab.getMeasuredHeight() / 2;
-
-        // get the final radius for the clipping circle
-        int fStartRadius = Math.max(fab.getWidth(), fab.getHeight()) / 2;
-        int fFinalRadius = 0;
-
-        // create the animator for this view
-        Animator fabAnim =
-                ViewAnimationUtils.createCircularReveal(fab, fx, fy, fStartRadius, fFinalRadius);
-
-        fabAnim.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                fab.setVisibility(View.INVISIBLE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
-
-        // Get animation info for the recording view -----------------------------------------------
-
-        // previously invisible view
-        View screen = findViewById(R.id.recording_screen);
-
-        int cx = screen.getMeasuredWidth() / 2;
-        int cy = screen.getMeasuredHeight() / 2;
-
-        // get the final radius for the clipping circle
-        int cFinalRadius = (int) Math.hypot(screen.getWidth(), screen.getHeight());
-        int cStartRadius = 0;
-
-        // create the animator for this view
-        Animator circleAnim =
-                ViewAnimationUtils.createCircularReveal(screen, screen.getWidth() - fx, screen.getHeight() - fy, cStartRadius, cFinalRadius);
-
-        circleAnim.addListener(new Animator.AnimatorListener() {
+        final Animator recorderAnimator = ViewHelper.startRecordingReveal(this);
+        recorderAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
 
@@ -154,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animator animator) {
                 // TODO: Start recording here!
+                recordingFragment.recordingStart();
             }
 
             @Override
@@ -167,13 +128,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
 
-        // Start the animations! -------------------------------------------------------------------
-        // make the views visible and start the animation
-        fab.setVisibility(View.VISIBLE);
-        screen.setVisibility(View.VISIBLE);
-        fabAnim.start();
-        circleAnim.start();
+    /**
+     * Uses a radial animation to hide the recording screen and redisplay the FAB
+     */
+    public void hideRecordingScreen() {
+
+        //TODO: Go not full screen
+
+        final Animator recorderAnimator = ViewHelper.startRecordingHide(this);
+        recorderAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
     }
 
 }
