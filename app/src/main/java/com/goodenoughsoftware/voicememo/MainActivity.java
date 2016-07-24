@@ -1,13 +1,14 @@
 package com.goodenoughsoftware.voicememo;
 
+import android.animation.Animator;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewAnimationUtils;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -29,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                showRecordingScreen();
             }
         });
     }
@@ -83,6 +83,97 @@ public class MainActivity extends AppCompatActivity {
             freeText.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    /**
+     * Uses a radial reveal to instantiate and start the recording
+     */
+    void showRecordingScreen() {
+
+        // Get animation info for FAB --------------------------------------------------------------
+
+        // previously invisible view
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        // get the center for the fab circle
+        int fx = fab.getMeasuredWidth() / 2;
+        int fy = fab.getMeasuredHeight() / 2;
+
+        // get the final radius for the clipping circle
+        int fStartRadius = Math.max(fab.getWidth(), fab.getHeight()) / 2;
+        int fFinalRadius = 0;
+
+        // create the animator for this view
+        Animator fabAnim =
+                ViewAnimationUtils.createCircularReveal(fab, fx, fy, fStartRadius, fFinalRadius);
+
+        fabAnim.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                fab.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
+        // Get animation info for the recording view -----------------------------------------------
+
+        // previously invisible view
+        View screen = findViewById(R.id.recording_screen);
+
+        int cx = screen.getMeasuredWidth() / 2;
+        int cy = screen.getMeasuredHeight() / 2;
+
+        // get the final radius for the clipping circle
+        int cFinalRadius = (int) Math.hypot(screen.getWidth(), screen.getHeight());
+        int cStartRadius = 0;
+
+        // create the animator for this view
+        Animator circleAnim =
+                ViewAnimationUtils.createCircularReveal(screen, screen.getWidth() - fx, screen.getHeight() - fy, cStartRadius, cFinalRadius);
+
+        circleAnim.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                // TODO: Start recording here!
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
+
+        // Start the animations! -------------------------------------------------------------------
+        // make the views visible and start the animation
+        fab.setVisibility(View.VISIBLE);
+        screen.setVisibility(View.VISIBLE);
+        fabAnim.start();
+        circleAnim.start();
     }
 
 }
