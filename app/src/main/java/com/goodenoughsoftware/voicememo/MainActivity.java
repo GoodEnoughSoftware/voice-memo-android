@@ -1,29 +1,26 @@
 package com.goodenoughsoftware.voicememo;
 
 import android.animation.Animator;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
-import com.google.android.gms.drive.Drive;
-import com.google.android.gms.drive.DriveApi.DriveContentsResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.goodenoughsoftware.voicememo.fragments.RecordingFragment;
 import com.goodenoughsoftware.voicememo.fragments.TagsDialogFragment;
 import com.goodenoughsoftware.voicememo.utils.ViewHelper;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveApi.DriveContentsResult;
 
 public class MainActivity extends AppCompatActivity {
 

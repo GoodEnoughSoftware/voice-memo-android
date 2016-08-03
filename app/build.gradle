@@ -24,6 +24,8 @@ dependencies {
     testCompile 'junit:junit:3.8.2'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
+    compile 'com.google.apis:google-api-services-drive:v2-rev230-1.22.0'
     compile 'com.afollestad.material-dialogs:core:0.8.6.2'
+    compile 'com.google.android.gms:play-services-drive:8.4.0'
     //compile 'com.github.GoodEnoughSoftware:audroid:v0.1-alpha'
 }
