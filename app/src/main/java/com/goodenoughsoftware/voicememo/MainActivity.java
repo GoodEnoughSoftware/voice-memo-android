@@ -1,11 +1,9 @@
 package com.goodenoughsoftware.voicememo;
 
 import android.animation.Animator;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.goodenoughsoftware.voicememo.fragments.RecordingFragment;
-import com.goodenoughsoftware.voicememo.fragments.TagsDialogFragment;
 import com.goodenoughsoftware.voicememo.utils.ViewHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -104,9 +101,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private void displayTags() {
 
-        FragmentManager fm = getSupportFragmentManager();
-        TagsDialogFragment tagsDialogFragment = new TagsDialogFragment();
-        tagsDialogFragment.show(fm, "dialog_tags");
+        boolean wrapInScrollView = true;
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .customView(R.layout.layout_tags, wrapInScrollView)
+                .title(R.string.tags_dialog_title)
+                .iconRes(R.drawable.add_tags_label)
+                .positiveText(R.string.tags_dialog_dismiss)
+                .show();
 
     }
 

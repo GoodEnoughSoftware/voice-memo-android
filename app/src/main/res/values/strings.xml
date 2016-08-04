@@ -14,4 +14,8 @@
     <string name="website_byline">http://goodenoughsoftware.com</string>
     <string name="website_link">http://goodenoughsoftware.com</string>
 
+    <!-- Tags Dialog -->
+    <string name="tags_dialog_title">Manage Tags</string>
+    <string name="tags_dialog_dismiss">Dismiss</string>
+
 </resources>

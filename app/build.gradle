@@ -25,5 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
     compile 'com.afollestad.material-dialogs:core:0.8.6.2'
+    compile 'com.android.support:cardview-v7:24.0.0'
     //compile 'com.github.GoodEnoughSoftware:audroid:v0.1-alpha'
 }
