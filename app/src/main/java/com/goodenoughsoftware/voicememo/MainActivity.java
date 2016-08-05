@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
                 .positiveText(R.string.tags_dialog_dismiss)
                 .show();
 
+        View rootView = dialog.getCustomView();
+
     }
 
     /**
