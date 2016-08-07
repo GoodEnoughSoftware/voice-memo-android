@@ -6,4 +6,57 @@
     android:theme="@style/AppTheme.NoActionBar"
     android:id="@+id/recording_screen">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/timer_container"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="00"
+            android:id="@+id/minute_number"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/timer_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text=":"
+            android:id="@+id/timer_separator"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/timer_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="00"
+            android:id="@+id/second_number"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/timer_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="@dimen/timer_button_size"
+            android:layout_height="@dimen/timer_button_size"
+            android:id="@+id/play_pause_button"
+            android:src="@drawable/play_circle_white" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/stop_button" />
+    </LinearLayout>
 </LinearLayout>
